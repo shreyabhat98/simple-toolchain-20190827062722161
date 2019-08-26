@@ -1,14 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
-import Footer from './Footer';
+// import Footer from './Footer';
 
 
 export class Form extends React.Component {
-
     
+    constructor(props){
+        super(props)
+        this.state = {
+            CIO: null,
+            BU: null,
+            team: null,
+            requester: null
+
+        }
+    }
+    
+    handleSubmit = (event) => {
+        event.preventDefault()
+        const data = this.state
+        console.log("Final data is: ", data)
+    }
+
+    handleInputChange = (event) => {
+        event.preventDefault()
+        this.setState({
+            [event.target.name]: event.target.value,
+            value: event.target.value
+        })
+    }
 
     render() {
+        const {team} = this.state
+        const {requester} = this.state
         return (
             <div>
                 <div className="row">
@@ -23,7 +48,7 @@ export class Form extends React.Component {
                     </div>
                 </div>
 
-                <form className="needs-validation" novalidate>
+                <form className="needs-validation" novalidate onSubmit={this.handleSubmit}>
                     <div className="row">
                         <div className="col">
                             <div className="card-group">
@@ -31,45 +56,38 @@ export class Form extends React.Component {
                                     <div className="card-body">  
 
                                         <label htmlFor="CIO" id="CIO">CIO Approvals:</label>
-
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="CIOy" name="CIO"
-                                         class="custom-control-input"></input>
-                                        <label class="custom-control-label" for="CIOy" 
-                                        value="yes">Yes</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="CIOn" name="CIO" 
-                                        class="custom-control-input"></input>
-                                        <label class="custom-control-label" for="CIOn" 
-                                        value="no">No</label>
-                                        </div>
+                                        <select className="form-control" id="CIO" name="CIO" onChange={this.handleInputChange}>
+                                            <option value="" disabled selected>Select your option</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
+                                        </select>
+                                    
                                         
                                         <br></br>
                                         <label htmlFor="BU">Business Area</label>
-                                        <select className="form-control" id="BU">
+                                        <select className="form-control" id="BU" name="BU" onChange={this.handleInputChange}>
                                             <option value="" disabled selected>Select your option</option>
-                                            <option>Technology-Controls</option>
-                                            <option>Technology-CPB</option>
-                                            <option>Technology-CTO</option>
-                                            <option>Technology-DES</option>
-                                            <option>Technology-ES</option>
-                                            <option>Technology-PBB</option>
-                                            <option>Technology-Core Banking</option>
-                                            <option>Technology-Payments</option>
-                                            <option>Technology-PBM</option>
-                                            <option>Technology-NWM P2</option>
+                                            <option value="Technology-Controls">Technology-Controls</option>
+                                            <option value="Technology-CPB">Technology-CPB</option>
+                                            <option value="Technology-CTO">Technology-CTO</option>
+                                            <option value="Technology-DES">Technology-DES</option>
+                                            <option value="Technology-ES">Technology-ES</option>
+                                            <option value="Technology-PBB">Technology-PBB</option>
+                                            <option value="Technology-Core Banking">Technology-Core Banking</option>
+                                            <option value="Technology-Payments">Technology-Payments</option>
+                                            <option value="Technology-PBM">Technology-PBM</option>
+                                            <option value="Technology-NWM P2">Technology-NWM P2</option>
                                         </select>
                                         <br></br>
                                         
                                         <label htmlFor="team">Team</label>
-                                        <input type="text" id="team" className="form-control"
+                                        <input type="text" id="team" name="team" value={team} className="form-control"
                                          required></input>
                                         <br/>
 
                                         <label htmlFor="requester" required>Requester</label>
                                         <input type="text" id="requester" className="form-control" 
-                                        required></input>
+                                        required name="requester" value={requester}></input>
                                         <br></br>
 
                                         <label htmlFor="resourceType" >Resource Type</label>
@@ -141,24 +159,11 @@ export class Form extends React.Component {
                                     <br></br>
 
                                     <label htmlFor="runChange" id="runChange" >Run / Change</label>
-                                    {/* <select className="form-control" id="resourceType" >
+                                    <select className="form-control" id="resourceType" >
                                      <option value="" disabled selected>Select your option</option>
                                      <option>Run</option>
                                      <option>Change</option>
-                                    </select>  */}
-                                    
-                                      <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="runChangey" name="runChange"
-                                         class="custom-control-input"></input>
-                                        <label class="custom-control-label" for="runChangey" 
-                                        value="run">Run</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="runChangen" name="runChange" 
-                                        class="custom-control-input"></input>
-                                        <label class="custom-control-label" for="runChangen" 
-                                        value="change">Change</label>
-                                        </div>
+                                    </select> 
                                     <br></br>
 
                                     <label htmlFor="runBudget" >Within Budget/Target? (if run)</label>
@@ -206,11 +211,12 @@ export class Form extends React.Component {
                                     <br/><br/>
 
                                    <div className="text-center">
-                                       <Link to="/home">
-                                        <button type="Submit" className="btn btn-success">
+                                       {/* <Link to="/home"> */}
+                                       {/* <button type="reset" className="btn btn-dark">Reset</button> */}
+                                        <button type="button" className="btn btn-success">
                                             Submit
                                         </button>
-                                        </Link>
+                                        {/* </Link> */}
                                    </div>
                                 </form>
                             </div>

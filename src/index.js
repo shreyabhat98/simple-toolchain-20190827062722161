@@ -15,6 +15,8 @@ import AdminPage from './AdminPage';
 import Login from './Login';
 import App2 from './App2';
 
+import TestForm from './myComponents/TestForm'
+
 
 const routing = (
     <BrowserRouter>
@@ -28,6 +30,7 @@ const routing = (
         <Route path="/AdminPage" component={AdminPage} />
         <Route path="/Login" component={Login} />
         <Route path="/Dashboard" component={Container} />
+        <Route path="/testform" component={TestForm} />
         {/* <Route path="/download_form" component={  } */}
     </BrowserRouter>
 )

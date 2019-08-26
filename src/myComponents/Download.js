@@ -1,7 +1,7 @@
 import React from 'react';
 import downloadFile  from './tryDownload.txt';
 import Header from './Header';
-import Footer from './Footer';
+// import Footer from './Footer';
 import { Link } from 'react-router-dom';
 
 export class Download extends React.Component {
